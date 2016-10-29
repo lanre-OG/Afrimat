@@ -15,7 +15,7 @@ export default Ember.Route.extend({
    		this.store.createRecord('cloth', cloth).save().then(function(cloth) {
            _this.transitionTo('cloths.cloth', cloth);
 
-   		})
+   		});
    	}
    }
 

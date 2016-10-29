@@ -14,6 +14,7 @@ Router.map(function() {
   this.route('cloths', function () {
     this.route('cloth', { path: ':cloth_id' });
     this.route('new');
+    this.route('edit', { path: ':cloth_id/edit' });
   });
   this.route('homedecoration');
   this.route('checkokout');

@@ -29,9 +29,26 @@ module.exports = function(app) {
       }
   ];
 
+  
+  
   artsRouter.get('/', function(req, res) {
+    var data = [];
+    arts.forEach(function(item){
+      data.push({
+        type: 'arts',
+        id: item.id.toString(),
+        attributes: {
+          name: item.name,
+          artist: item.artist,
+          price: item.price,
+          image: item.image
+        }
+      });
+    });
+
+    res.set('content-Type', 'application/vnd.api+json');
     res.send({
-      'arts': arts
+      data: data
     });
   });
 

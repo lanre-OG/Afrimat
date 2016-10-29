@@ -30,18 +30,45 @@ module.exports = function(app) {
   ];
 
   clothsRouter.get('/', function(req, res) {
+    var data = [];
+    cloths.forEach(function(item){
+      data.push({
+        type: 'cloths',
+        id: item.id.toString(),
+        attributes: {
+          name: item.name,
+          size: item.size,
+          price: item.price,
+          image: item.image
+        }
+      });
+    });
+
+    res.set('content-Type', 'application/vnd.api+json');
     res.send({
-      'cloths': cloths
+      data: data
     });
   });
 
   clothsRouter.post('/', function(req, res) {
-    var newCloth =req.body.cloth;
+    var newCloth =req.body.data.attributes;
     var newId = cloths.length + 1;
-    newCloth.id = newId;
-    cloths.push(newCloth);
+
+    cloths.push({
+      name: newCloth.name,
+      size: newCloth.size,
+      price: newCloth.price,
+      image: newCloth.image,
+      id: newId
+    });
+
+    res.set('content-Type', 'application/vnd.api+json');
     res.send({
-      cloth: newCloth
+      data: {
+        type: 'cloths',
+        id:  newId,
+        attributes: newCloth
+      }
     });
   });
 
@@ -53,10 +80,23 @@ module.exports = function(app) {
     });
   });
 
-  clothsRouter.put('/:id', function(req, res) {
+  clothsRouter.patch('/:id', function(req, res) {
+    var clothAttrs = req.body.data.attributes;
+    var clothId= req.param('id');
+    cloths.forEach(function(item) {
+      if (item.id === parseInt(clothId)) {
+        item.name = clothAttrs.name;
+        item.size = clothAttrs.size;
+        item.price = clothAttrs.price;
+        item.image = clothAttrs.image;
+
+      }
+    });
     res.send({
-      'cloths': {
-        id: req.params.id
+      data: {
+        type: 'cloths',
+        id: clothId,
+        attributes: clothAttrs   
       }
     });
   });
