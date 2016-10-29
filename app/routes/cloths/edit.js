@@ -10,12 +10,7 @@ export default Ember.Route.extend({
 	},
 
 	actions: {
-		updateCloth: function(cloth) {
-			var _this = this;
-			cloth.save().then(function(cloth) {
-				_this.transitionTo('cloths.cloth', cloth);
-			});
-		}
+	
 	}
 
 });
