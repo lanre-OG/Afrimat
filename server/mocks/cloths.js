@@ -36,7 +36,13 @@ module.exports = function(app) {
   });
 
   clothsRouter.post('/', function(req, res) {
-    res.status(201).end();
+    var newCloth =req.body.cloth;
+    var newId = cloths.length + 1;
+    newCloth.id = newId;
+    cloths.push(newCloth);
+    res.send({
+      cloth: newCloth
+    });
   });
 
   clothsRouter.get('/:id', function(req, res) {
