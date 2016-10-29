@@ -1,0 +1,5 @@
+<div class="list-group">
+  {{#each cloths as |cloth|}}
+     {{#link-to 'cloths.cloth' cloth class="list-group-item"}}{{cloth.name}}{{/link-to}}
+  {{/each}}
+</div>

@@ -7,6 +7,16 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('arts', function () {
+     this.route('art', { path: ':art_id' });
+  });
+
+  this.route('cloths', function () {
+    this.route('cloth', { path: ':cloth_id' });
+    this.route('new');
+  });
+  this.route('homedecoration');
+  this.route('checkokout');
 });
 
 export default Router;

@@ -1,0 +1,5 @@
+<div class="list-group">
+  {{#each arts as |art|}}
+      {{#link-to 'arts.art' art class="list-group-item"}}{{art.name}}{{/link-to}}
+  {{/each}}
+</div>
