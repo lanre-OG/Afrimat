@@ -11,6 +11,30 @@ export default Ember.Route.extend({
 
     setupController: function(controller, models) {
     	return controller.setProperties(models);
+    },
+
+    actions: {
+    	 deleteCloth: function(cloth) {
+      	var _this = this;
+      	cloth.destroyRecord().then(function() {
+      		_this.transitionTo('cloths');
+
+      	});
+      },
+      	updateCloth: function(cloth) {
+			var _this = this;
+			cloth.save().then(function(cloth) {
+				_this.transitionTo('cloths.cloth', cloth);
+			});
+		},
+		createCloth: function(cloth) {
+   		var _this = this;
+   		this.store.createRecord('cloth', cloth).save().then(function(cloth) {
+           _this.transitionTo('cloths.cloth', cloth);
+
+   		});
+   	}
+   	
     }
 });
 

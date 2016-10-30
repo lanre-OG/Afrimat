@@ -102,6 +102,13 @@ module.exports = function(app) {
   });
 
   clothsRouter.delete('/:id', function(req, res) {
+    var clothId = req.param('id');
+    for (var i = 0; i < cloths.length; i++ ) {
+      if (parseInt(clothId) === cloths[i].id) {
+        cloths.splice(i, 1);
+        break;
+      }
+    }
     res.status(204).end();
   });
 
