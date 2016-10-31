@@ -10,13 +10,7 @@ export default Ember.Route.extend({
 	},
 
 	actions: {
-      deleteCloth: function(cloth) {
-      	var _this = this;
-      	cloth.destroyRecord().then(function() {
-      		_this.transitionTo('cloths');
-
-      	});
-      }
+     
 	}
  
 });

@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
    model: function() {
-   	return { name: '', size: '', price: '', image: ''};
+   	return this.store.createRecord('cloth');
    },
    
    setupController: function(controller, model) {

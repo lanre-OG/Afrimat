@@ -1,9 +1,12 @@
 <h3>Add new Cloth</h3>
 
 <form {{action 'submit' on='submit'}}>
-    <div class="form-group">
+    <div class="form-group {{if errors.name 'has-error'}}">
        <label for=""> Name</label>
        {{input class="form-control" value=cloth.name }}
+       {{#each errors.name as |error|}}
+          <span class="help-block">{{error.message}}</span>
+       {{/each}}
     </div>
     <div class="form-group">
        <label for=""> Size</label>
