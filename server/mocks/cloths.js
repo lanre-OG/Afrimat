@@ -53,23 +53,44 @@ module.exports = function(app) {
   clothsRouter.post('/', function(req, res) {
     var newCloth =req.body.data.attributes;
     var newId = cloths.length + 1;
-
-    cloths.push({
-      name: newCloth.name,
-      size: newCloth.size,
-      price: newCloth.price,
-      image: newCloth.image,
-      id: newId
+    var clothNames= [];
+    cloths.forEach(function(item) {
+      clothNames.push(item.name);
     });
 
-    res.set('content-Type', 'application/vnd.api+json');
-    res.send({
-      data: {
-        type: 'cloths',
-        id:  newId,
-        attributes: newCloth
-      }
-    });
+    if (clothNames.indexOf(newCloth.name) !== -1) {
+      res.status(404).send({
+        errors: [
+          {
+             source: { pointer: 'data/attributes/name' },
+             detail: 'must be unique'
+
+          }
+
+
+        ]
+
+      });
+
+    } else { 
+
+          cloths.push({
+            name: newCloth.name,
+            size: newCloth.size,
+            price: newCloth.price,
+            image: newCloth.image,
+            id: newId
+          });
+
+          res.set('content-Type', 'application/vnd.api+json');
+          res.send({
+            data: {
+              type: 'cloths',
+              id:  newId,
+              attributes: newCloth
+            }
+          });
+     }
   });
 
   clothsRouter.get('/:id', function(req, res) {
@@ -83,22 +104,47 @@ module.exports = function(app) {
   clothsRouter.patch('/:id', function(req, res) {
     var clothAttrs = req.body.data.attributes;
     var clothId= req.param('id');
+    
+    var clothNames = [];
     cloths.forEach(function(item) {
-      if (item.id === parseInt(clothId)) {
-        item.name = clothAttrs.name;
-        item.size = clothAttrs.size;
-        item.price = clothAttrs.price;
-        item.image = clothAttrs.image;
+      if (item.id !== parseInt(clothId)) {
+         clothNames.push(item.name);
+      }
+    });
+    
+     if (clothNames.indexOf(clothAttrs.name) !== -1) {
+      res.status(404).send({
+        errors: [
+          {
+             source: {pointer: 'data/attributes/name' },
+             detail: 'must be unique'
 
+          }
+
+
+        ]
+
+      });
+
+    } else { 
+
+        cloths.forEach(function(item) {
+          if (item.id === parseInt(clothId)) {
+            item.name = clothAttrs.name;
+            item.size = clothAttrs.size;
+            item.price = clothAttrs.price;
+            item.image = clothAttrs.image;
+
+          }
+        });
+        res.send({
+          data: {
+            type: 'cloths',
+            id: clothId,
+            attributes: clothAttrs   
+          }
+        });
       }
-    });
-    res.send({
-      data: {
-        type: 'cloths',
-        id: clothId,
-        attributes: clothAttrs   
-      }
-    });
   });
 
   clothsRouter.delete('/:id', function(req, res) {
