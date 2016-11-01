@@ -4,7 +4,7 @@ import DS from 'ember-data';
 // import validator from 'validator';
 
 export default Ember.Component.extend({
-    errors: DS.Errors.create(),
+    // errors: DS.Errors.create(),
 
 	buttonLabel: function() {
 		return (this.get('cloth').id) ? 'Update Product' : 'Add Product';

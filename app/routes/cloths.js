@@ -21,19 +21,8 @@ export default Ember.Route.extend({
 
       	});
       },
-      	updateCloth: function(cloth) {
-			var _this = this;
-			cloth.save().then(function(cloth) {
-				_this.transitionTo('cloths.cloth', cloth);
-			});
-		},
-		createCloth: function(cloth) {
-   		var _this = this;
-   		cloth.save().then(function(cloth) {
-           _this.transitionTo('cloths.cloth', cloth);
-
-   		});
-   	}
+      
+		
 
     }
 });
