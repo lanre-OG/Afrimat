@@ -7,3 +7,8 @@
 <div class="detail image">
    <img class="feed-img"src={{art.image}} alt=""> 
 </div>
+<div>
+  {{#link-to 'arts.edit' art class="btn btn-success"}}Edit Product{{/link-to}}
+  <a href="" class="btn btn-danger" {{action 'deleteArt'}}> Delete Product</a>
+  {{#link-to 'arts.checkout'  class="btn btn-success"}}Checkout{{/link-to}}
+</div>
