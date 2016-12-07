@@ -1,0 +1,25 @@
+<h3>Users: <button class="admin-additem btn btn-sm btn-default pull-right" {{action "addNew"}} type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add user item</button></h3> 
+
+<div class="admin-table-container">
+	<table class="admin-table table table-striped table-condensed">
+		<thead>
+			<tr>
+				<th class="col-sm-1">Download</th>
+				<th class="col-sm-1">Delete</th>
+				<th class="col-sm-2">User</th>
+				<th class="col-sm-2">Email</th>
+				<th class="col-sm-3">Roles</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each pagedContent as |item|}}
+				{{admin/users/user-item user=item}}
+				
+			{{/each}}
+
+			
+		</tbody>
+	</table>
+	{{page-numbers content=pagedContent}}
+</div>
+{{outlet}}

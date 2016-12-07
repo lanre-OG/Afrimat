@@ -49,3 +49,29 @@
 	max-width: 25%;
 }
 
+body {
+	padding-top: 115px;
+}
+
+.app-nav {
+	min-height: 102px;
+	border-bottom: 1px solid #eee;
+	background: white;
+}
+
+.nav-tabs {
+	border-bottom: none;
+}
+
+.login-nav-row {
+	min-height: 150px;
+}
+
+/*-- Registration Page */
+.reg-input-field {
+  width: 100% !important;
+}
+
+.reg-label {
+  margin-top: 5px;
+}

@@ -1,0 +1,30 @@
+{{#if auth.isLoggedIn}} {{! Display user name and logout button}}
+	<p class="inline pull-right">
+		Hello {{auth.user.username}} {{#if auth.profile.roles.admin}}(admin){{/if}}
+		<button type="button" class="btn btn-sm btn-default" {{action "logout"}}>Log out</button>
+		{{#if auth.profile.roles.admin}}
+			{{#link-to 'admin'}}
+				<button type="button" class="btn btn-sm btn-default">Switch to Admin View</button>
+			{{/link-to}}
+		{{/if}}
+	</p>
+{{else}} {{!Display login page}}
+	<form class="form-inline pull-right">
+		{{#if auth.errorMsg}}
+			<div class="auth-error alert">
+				{{auth.errorMsg}}
+			</div>
+		{{/if}}
+		{{input type="text" class="input-sm form-control" value=auth.username enter="login" placeholder="Username"}}
+		{{input type="text"class="input-sm form-control" value=auth.password enter="login" placeholder="Password" type="password"}}
+		<label class="checkbox">
+			{{input type="checkbox" checked=auth.remember}}
+			Remember me
+		</label>
+		<button type="button" class="btn btn-default btn-sm" {{action "login"}}>Sign in</button>
+		<br>
+		<p class="right margin-3">Don't have an account? 
+			{{#link-to "register"}}Register Now.{{/link-to}}
+		</p>
+	</form>
+{{/if}}

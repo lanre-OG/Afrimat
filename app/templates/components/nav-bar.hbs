@@ -21,10 +21,33 @@
 
              
               <div class="navbar-right">
-              {{auth-manager}}
+              {{auth-bar}}
               </div>
            </div>
           </div>
           
-        </nav>
-     </div>
+          <div class="row">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-10">
+            <ul class="nav nav-tabs">
+              <!-- navigation menu -->
+              {{#link-to "register" tagName='li'}}
+                <a {{bind-attr href="view.href"}}><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Register</a>
+              {{/link-to}}
+              {{#if auth.isLoggedIn}}
+                {{#link-to "home" tagName='li'}}
+                  <a {{bind-attr href="view.href"}}><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
+                {{/link-to}}
+                {{#if auth.profile.roles.admin}}
+                  {{#link-to "admin" tagName='li'}}
+                    <a {{bind-attr href="view.href"}}><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Admin</a>
+                  {{/link-to}}
+                {{/if}}
+              {{/if}}
+            </ul>
+          </div>
+        </div>  
+        
+      
+     </nav>
+  </div>

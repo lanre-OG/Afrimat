@@ -1,0 +1,82 @@
+<h3>Modifing user: &quot;{{model.username}}&quot; ({{model.id}}) <button class="btn btn-small btn-default" type="button" {{action "download"}}><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download</button></h3> 
+
+
+
+<h4>Set values locally (in browser) to preview below, click update when done:</h4>
+<form class="form form-inline">
+	<div class="row">
+		<label class="control-label col-md-3" for="user">Username:</label>
+	    {{input type="text" id="user" class="form-control input-sm col-md-7" value=model.username}}<br>
+	</div>
+	<div class="row">
+	    <label class="control-label col-md-3" for="password">Password:</label>
+		{{input type="text" id="password" class="form-control input-sm col-md-7" value=model.password}}
+		<span class="help-block">&nbsp;Password will be salted upon submission, if modified.</span>
+	</div>
+	<div class="row">
+	    <label class="control-label col-md-3" for="email">Email:</label>
+		{{input type="text" id="email" class="form-control input-sm col-md-7" value=model.email}}
+	</div>
+	
+	<div class="row">
+	    <label class="control-label col-md-3" for="age">Age:</label>
+		{{input type="text" id="age" class="form-control input-sm col-md-7" value=model.profile.age}}
+	</div>
+	<div class="row">
+	    <label class="control-label col-md-3" for="gender">Gender:</label>
+		{{#x-select id="gender" class="form-control" value=model.profile.content.gender as |xs|}}
+			{{#xs.option disabled=true selected=true}}Select most applicable{{/xs.option}}
+			{{#each constants.genders as |g|}}
+				{{#xs.option value=g}}{{g}}{{/xs.option}}
+				
+			{{/each}}
+		{{/x-select}}
+	</div>
+	<div class="row">
+	    <label class="control-label col-md-3" for="education-level">Education Level:</label>
+		{{#x-select id="education-level" class="form-control" value=model.profile.content.educationlevel as |xs|}}
+			{{#xs.option disabled=true selected=true}}Select highest level achieved{{/xs.option}}
+			{{#each constants.educationLevels as |l|}}
+				{{#xs.option value=l}}{{l}}{{/xs.option}}
+				
+			{{/each}}
+		{{/x-select}}
+	</div>
+	<div class="row">
+		<label class="control-label col-md-3" for="city">City:</label>
+  		{{input type="text" value=model.profile.city class="form-control input-sm col-md-7" placeholder="city"}}
+  	</div>
+  	<div class="row">
+	   <label class="control-label col-md-3" for="state">State:</label>
+  		{{#x-select id="state" class="form-control" value=model.profile.content.state as |xs|}}
+			{{#xs.option disabled=true selected=true}}Select current residence{{/xs.option}}
+			{{#each constants.states as |s|}}
+				{{#xs.option value=s}}{{s}}{{/xs.option}}
+				
+			{{/each}}
+		{{/x-select}}
+	</div>
+	<div class="row">
+		<label class="control-label col-md-3" for="ip">IP:</label>
+  		{{input type="text" value=model.profile.ip class="form-control input-sm col-md-7" placeholder="city"}}
+  	</div>
+	<h5>Roles</h5>
+	<div class="row">
+		<label class="control-label col-md-3" for="admin">Admin:</label> 
+		{{input type="checkbox" id="admin" checked=model.profile.roles.admin}} <span class="help-inline">Toggle to enable/disable role</span>
+	</div>
+	<div class="row">
+		<label class="control-label col-md-3" for="researcher">Researcher:</label> 
+		{{input type="checkbox" id="researcher" checked=model.profile.roles.researcher}} <span class="help-inline">Toggle to enable/disable role</span>
+	</div>
+	<div class="row">
+		<label class="control-label col-md-3" for="student">Student:</label> 
+		{{input type="checkbox" id="student" checked=model.profile.roles.student}} <span class="help-inline">Toggle to enable/disable role</span>
+	</div>
+
+	<div class="row">
+		<button class="btn btn-large btn-block btn-default" {{action "updateServerModel"}} type="button">
+			Update User &quot;{{model.username}}&quot; (Push changes to server)
+		</button>
+	</div>
+</form>

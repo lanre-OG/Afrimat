@@ -1,0 +1,13 @@
+<!-- Admin perspective -->
+<div class="row-fluid">
+	<div class="admin-nav col-sm-2">
+		<ul class="nav nav-pills nav-stacked">
+			{{render "adminnav"}}
+		</ul>
+		
+	</div>
+	<div class="admin-pane col-sm-10">
+		{{!-- {{bread-crumbs tagName="ol" outputStyle="bootstrap" linkable=true}} --}}
+		{{outlet}}
+	</div>
+</div>

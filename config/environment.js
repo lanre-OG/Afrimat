@@ -5,6 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'afrimat',
     environment: environment,
     rootURL: '/',
+    routerRootURL: '/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
@@ -39,7 +40,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.rootURL = "static/ember/"
   }
 
   return ENV;

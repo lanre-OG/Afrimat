@@ -1,0 +1,16 @@
+<td>
+	<button class="btn btn-xs btn-default" type="button" {{action "download"}}><span class="glyphicon glyphicon-download" aria-hidden="true"></span></button>
+</td>
+<td>
+	<button class="btn btn-xs btn-default" {{action "areYouSure"}}><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+	{{#bs-modal open=showDeleteModal footer=false}}
+		{{#bs-modal-body}}<p style="font-size: 16px;">Are you sure you want to delete user {{user.id}}?</p>{{/bs-modal-body}}
+		{{#bs-modal-footer as |footer|}}
+			{{#bs-button action=(action "close" target=footer) type="success"}}Cancel!{{/bs-button}}
+			{{#bs-button action=(action "delete") type="danger"}}Delete!{{/bs-button}}
+		{{/bs-modal-footer}}
+	{{/bs-modal}}
+</td>
+<td>{{#link-to 'admin.user' user.id}}{{user.user.username}}{{/link-to}}</td>
+<td>{{user.user.email}}</td>
+<td>{{user.rolesPrint}}</td>
